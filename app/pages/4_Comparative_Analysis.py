@@ -21,10 +21,9 @@ df_tmp=df[(df['Country/Group Name'].isin(country)) & (df['Subject']==subject)]
 # units=df_tmp['Units'].unique()
 # unit=st.selectbox('Select Unit',units)
 # df_tmp=df_tmp[df_tmp['Units']==unit]
-scale=df_tmp.iloc[0]['Scale']
 if st.button('Plot'):
     #estimate_year=int(df_tmp.loc[df_tmp.index[0],'Estimates Start After'])
-
+    scale=df_tmp.iloc[0]['Scale']
     num_cols=np.arange(MIN_YEAR, MAX_YEAR).tolist()
     cols_to_keep=['Country/Group Name']+ num_cols
     df_tmp=df_tmp[cols_to_keep]
@@ -59,4 +58,4 @@ if st.button('Plot'):
 
     #Show data
     st.title('Data:')
-    st.write(df_tmp)
+    st.dataframe(df_tmp, use_container_width=True)
