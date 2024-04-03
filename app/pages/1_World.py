@@ -19,8 +19,8 @@ df_tmp=df_tmp.sort_values(by=selected_year,axis=0,ascending=False)
 display_row_count=30
 df_tmp=df_tmp.iloc[:display_row_count][:]
 
-fig = px.bar(df_tmp, y=selected_year, x='Country/Group Name', text_auto='.2s',
-            title=subject)
+fig = px.bar(df_tmp, x=selected_year, y='Country/Group Name',
+            title=subject, orientation='h')
 st.plotly_chart(fig, use_container_width=True)
 
 #Show data

@@ -50,7 +50,7 @@ if st.button('Plot'):
         
     # Edit the layout
     fig.update_traces(hoverinfo='all', mode='lines+markers')
-    fig.update_layout(title=subject+' (in '+ scale+')',
+    fig.update_layout(title=subject+' (in '+ str(scale)+')',
                    xaxis_title='Year',
                    yaxis_title=subject)
 
