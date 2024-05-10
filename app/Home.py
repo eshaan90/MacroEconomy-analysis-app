@@ -19,5 +19,5 @@ Tasks for Macroeconomy analysis tool:
 10. Analyze country's Institutional Environment Indicators such as 
     Ease of Doing Business Index (Source: US World Bank)
 11. Integrate app with World bank APIs
-12. 
+12. Make Philip's curve plot "(Inflation rate vs Unemployment rate)
 """
