@@ -3,10 +3,11 @@ import os
 import streamlit as st
 import configparser
 #import json
-
+thisfolder = os.path.dirname(os.path.abspath(__file__))
+initfile = os.path.join(thisfolder, 'config.ini')
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(initfile)
 MIN_YEAR = int(config.get('period', 'MIN_YEAR'))
 MAX_YEAR = int(config.get('period', 'MAX_YEAR'))
 DATAPATH=config.get('files', 'DATAPATH')
