@@ -2,17 +2,18 @@ import streamlit as st
 import pandas as pd
 import os
 import plotly.graph_objects as go
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 from numerize import numerize
+
+st.set_page_config(page_title="World Economics", layout="wide")
 
 #local
 from read_data import df_long,MIN_YEAR,MAX_YEAR
 # from visualize import plot_altair_line_chart
 
-st.set_page_config(page_title="World Economics", layout="wide")
 
-st.title('Our World in Numbers!')
-
+st.title(f'Our :green[World] From the MacroEconomic Lens')
+st.markdown(f'From :red[{MIN_YEAR}] to :red[{MAX_YEAR}]')
 st.info('This app provides tools to understand our world from the Economics lens')
 
 
@@ -123,46 +124,3 @@ st.plotly_chart(fig, use_container_width=True)
 #     default_index = 0,
 #     #orientation = "horizontal",
 # )
-
-"""
-Principles:
-
-If I'll use it in 20-30 years, only then there is a chance that others too will find value in it.
-
-
-- Simplicity
-- Usablility
-- Transparency
-
-
-- Explain like I'm 5
-- Provide depth in analysis and insights (Identify change in System Dynamics)
-- Digestable layout
-- Have a glossary page [Optional]
-
-Steps to understand a country's economic situation:
-1. Level of Indebtedness (Current Account Deficit or Surplus country)
-2. Nation's output (GDP, growth rate)
-3. Their population and land area (population density, life expectancy)
-4. State of inflation (consumer prices, its changes)
-5. Level of inequality (GINI index)
-
-Understanding countries within a region:
-1. Country's Relative performance against each other over time
-2. Top and bottom performers (Gulf between them) 
-[Use chloropeth maps and bar chart to identify relative performers, use two dimensional animated chart to visualize outliers]
-3. 
-4. 
-
-
-Compare:
-1. Compare Countries Performance
-2. Compare a country across 2-3 time frames
-
-
-Indicators:
-1. Average
-2. Median
-3. Upper Natural Process Limit & Lower Natural Process Limit
-
-"""

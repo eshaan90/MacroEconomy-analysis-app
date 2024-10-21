@@ -23,6 +23,24 @@ def plot_altair_line_chart(df,x,y,xtype,ytype,xtitle,ytitle,title):
         )
     return chart
 
-def plot_altair_bar_chart():
-    chart=None
+def plot_altair_multibar_chart(df,xtitle=None,ytitle=None,title='',subtitle=''):
+    brush=alt.selection_interval(encodings=['x'],bind='scales')
+    chart=alt.Chart(df,title=alt.Title(title,
+                                                subtitle=subtitle)
+                                                ).mark_bar().encode(
+        x=alt.X('Year:O',timeUnit='year',title=xtitle),
+        y=alt.Y('Value:Q',stack=None,title=ytitle),
+        xOffset="Country:N",
+        color=alt.Color('Country:N').legend(orient='bottom'),
+        # column=alt.Column('Country:N',align='each',center=True),
+        
+        tooltip=['Year:T','Country:N','Value:Q']
+    ).properties(
+        height=500,
+        width=300
+    ).add_params(
+                # selection,
+                brush
+    )#.interactive()
+
     return chart

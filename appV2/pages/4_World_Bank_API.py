@@ -5,9 +5,9 @@ import numpy as np
 from datetime import datetime
 import altair as alt
 
-st.set_page_config(page_title='World Bank API',
-                   layout="wide"
-    )
+# st.set_page_config(page_title='World Bank API',
+#                    layout="wide"
+#     )
 
 @st.cache_data(persist="disk")
 def get_series_info(q):
