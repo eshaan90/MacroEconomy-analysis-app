@@ -2,12 +2,14 @@
  
 This app helps visualize World Bank's macroeconomic data to analyze world's economies and also to compare and contrast the different economies. 
 
-Country's Page:
-<img src="imgs/country_page.png" width="300" />
+Country's Page:\n
+
+<img src="imgs/country_page.png" width="500" height="500"/>
 <!-- ![Screenshot of the Country page!](/imgs/country_page.png) -->
 
-World Bank API Page:
-<img src="imgs/world_bank_page.png" width="300" />
+World Bank API Page:\n
+
+<img src="imgs/world_bank_page.png" width="500" height="500" />
 <!-- ![Screenshot of the World Bank API page!](/imgs/world_bank_page.png) -->
 
 
