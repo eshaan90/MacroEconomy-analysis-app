@@ -33,15 +33,15 @@ with tab2:
     #     alt.Y(series).title(series, titleColor='#57A44C'),
     #     tooltip=['Year:T',series]
     # )
-    gdp = base.mark_bar(color='green',cornerRadius=2, width=12,binSpacing=0).encode(
-        alt.Y(f'mean({series}):Q').title(series, color='green'),
+    gdp = base.mark_bar(color='#5276A7',cornerRadius=2, width=12,binSpacing=0).encode(
+        alt.Y(f'mean({series}):Q').title(series, color='#5276A7'),
         tooltip=['Year:T',series]
     )
 
     series='GDP growth (annual %)'
-    gdp_growth = base.mark_line(stroke='pink', point=True,
+    gdp_growth = base.mark_line(stroke='#F18727', point=alt.OverlayMarkDef(color='#333'),
                                 interpolate='monotone').encode(
-        alt.Y(series).title(series, titleColor='pink'),
+        alt.Y(series).title(series, titleColor='#F18727').axis(titleColor='#F18727'),
         tooltip=['Year:T',series]
     )
 

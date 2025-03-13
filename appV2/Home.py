@@ -12,9 +12,8 @@ from read_data import df_long,MIN_YEAR,MAX_YEAR
 # from visualize import plot_altair_line_chart
 
 
-st.title(f'Our :green[World] From the MacroEconomic Lens')
-st.markdown(f'From :red[{MIN_YEAR}] to :red[{MAX_YEAR}]')
-st.info('This app provides tools to understand our world from the Economics lens')
+st.title(f':green[World] Through the MacroEconomic Lens')
+st.info(f'This app provides visual and statistical tools to help analyze, compare, and contrast  the world\'s economies. Data is sourced from World Bank and ranges from :red[{MIN_YEAR}] to :red[{MAX_YEAR}]')
 
 
 economy='WLD'
@@ -31,7 +30,7 @@ chart_data=df_world.dropna(axis=1,how='all', ignore_index=False,inplace=False)
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
-color='#ff0066'
+color='black'#'#ff0066'
 col1.markdown(
             f"<p style='color: {color}; "
             f"font-weight: bold; font-size: 20px;'>Population</p>",
@@ -72,6 +71,7 @@ col5.write(numerize.numerize(chart_data.loc['2022','GDP per capita (current US$)
 latitude = -22.2974
 longitude = -46.6062
 
+'''
 #making the geo-plot
 fig = go.Figure(go.Scattergeo(lat=[latitude], lon=[longitude])) #if you are passing just one lat and lon, put it within "[]""
 
@@ -115,6 +115,8 @@ fig.update_layout(width= 600, height=600, margin={"r":0,"t":0,"l":0,"b":0},
 # fig.write_html("3d_plot.html")
 # fig.show()
 st.plotly_chart(fig, use_container_width=True)
+'''
+
 # with st.sidebar:
 #     selected = option_menu(
 #     menu_title = "Main Menu",
