@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import altair as alt
+from read_data import MIN_YEAR,MAX_YEAR
 
 # st.set_page_config(page_title='World Bank API',
 #                    layout="wide"
@@ -48,6 +49,8 @@ col1, col2 = st.columns([.6, .4],vertical_alignment="top")
 data=get_series_info(q)
 data=data.to_frame(name='Series Name').reset_index().rename({'index':'Series ID'},axis=1)
 data=data[['Series Name','Series ID']]
+
+
 event=col2.dataframe(data=data[['Series Name']],use_container_width=True, hide_index=True,
              on_select="rerun", selection_mode="single-row")
 
@@ -60,7 +63,7 @@ economies=df_economies.name.tolist()
 selected_economies=st.sidebar.multiselect(label='2.Select countries/regions',options=economies,default='United States',max_selections=9)
 
 time_range = st.sidebar.slider(
-    "3.Select Data Range",min_value=1960,max_value=datetime.now().year,
+    "3.Select Data Range",min_value=MIN_YEAR,max_value=datetime.now().year,
     value=(1980, datetime.now().year)
     )
 

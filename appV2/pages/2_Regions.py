@@ -10,23 +10,27 @@ from visualize import plot_altair_line_chart
 st.markdown("<h1 style='text-align: center;'>Regions: An Exploration</h1>", unsafe_allow_html=True)
 
 regions=df_regions['name'].tolist()
-selected_region=st.selectbox('Select a region',regions)
+selected_region=st.sidebar.selectbox('Select a region',regions)
 members=df_regions[df_regions['name']==selected_region]['members'].values[0]
 members=members.split(',')
+# st.write(members)
 
+# st.write(df_long)
 df_region=df_long[df_long['Country']==selected_region]
 cols_to_keep=['Series','Year','Value']
 df_region=df_region[cols_to_keep]
 df_region=df_region.pivot(columns='Year',index='Series',values='Value')
 df_region=df_region.dropna(how='all', ignore_index=False,inplace=False)
-# st.header(selected_region)
+
+selected_data=df_long[df_long['economy'].isin(members)]
+st.write(selected_data)
 tab1, tab2, tab3, tab4 = st.tabs(["Overview", "Economy", "Compare","Data"])
 
 with tab1:
     st.write(f"Total members: {len(members)}")
 
     # st.write(df_region)
-    selected_year=st.slider('Select Year',MIN_YEAR,MAX_YEAR,step=1)
+    selected_year=st.sidebar.slider('Select Year',MIN_YEAR,MAX_YEAR,step=1)
 
     col1,col2=st.columns([0.7,0.3])
 
@@ -36,7 +40,7 @@ with tab1:
 
     series='GDP (current US$)'
     year='2009'
-    chart_data=df_long[(df_long['Series']==series)&(df_long['economy'].isin(members))]
+    chart_data=selected_data[selected_data['Series']==series]
 
     col1.write(df_region)
 
@@ -58,35 +62,44 @@ with tab2:
     # chart=plot_altair_line_chart(chart_data, 'Year','Value','temporal','quantitative','Year',series,series)
     selection = alt.selection_point(fields=['Country'], bind='legend')
     # point_nearest = alt.selection_point(on='pointerover', nearest=True)
-    chart=alt.Chart(chart_data).mark_line(point=True).encode(
-            x='Year:T',
-            y=alt.Y('Value',type='quantitative',title=None),
-            # color=alt.condition(point_nearest, alt.Color('Country',type='nominal').legend(orient='bottom'), alt.value('lightgray')),
-            color=alt.Color('Country',type='nominal').legend(orient='bottom'),
-            opacity=alt.condition(selection, alt.value(0.8), alt.value(0.2)),
-            tooltip=['Country','Year:T','Value']
-            ).properties(
-                height=500,
-                width=700,
-                title=series
-            ).configure_axis(
-                grid=True
-            ).configure_view(
-                stroke=None
-            ).add_params(
-                selection,
-                # point_nearest
-            ).interactive()
+    highlight = alt.selection_point(on="pointerover", fields=['Country'], nearest=True)
+    base=alt.Chart(chart_data).encode(
+        x='Year:T',
+        y=alt.Y('Value',type='quantitative',title=None),
+        # color=alt.condition(point_nearest, alt.Color('Country',type='nominal').legend(orient='bottom'), alt.value('lightgray')),
+        color=alt.Color('Country',type='nominal').legend(orient='bottom'),
+        tooltip=['Country','Year:T','Value']
 
-    chart.configure_title(
-        fontSize=20,
-        font='Courier',
-        anchor='start',
-        color='gray'
-        )
+    )
+    points = base.mark_circle().encode(
+                opacity=alt.value(0)
+            ).add_params(
+                highlight
+            ).properties(
+                width=600
+)
+    line=base.mark_line().encode(
+            # opacity=alt.condition(selection, alt.value(0.8), alt.value(0.2)),
+            size=alt.condition(~highlight, alt.value(1), alt.value(3)),
+            ).properties(
+                # height=500,
+                # width=700,
+                title=series
+            ).add_params(
+                # selection,
+                highlight
+            )
+
+
+    # chart.configure_title(
+    #     fontSize=20,
+    #     font='Courier',
+    #     anchor='start',
+    #     color='gray'
+    #     )
 
     # st.write(chart_data)
-    st.altair_chart(chart,use_container_width=True)
+    st.altair_chart((points+line).interactive(),use_container_width=True)
 
     series='GDP per capita (current US$)'
     chart_data=df_long[(df_long['Series']==series)&(df_long['economy'].isin(members))]

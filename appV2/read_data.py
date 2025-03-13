@@ -14,8 +14,11 @@ MIN_YEAR = int(config.get('period', 'MIN_YEAR'))
 MAX_YEAR = int(config.get('period', 'MAX_YEAR'))
 DATAPATH=config.get('files', 'DATAPATH')
 EDA=config.get('files', 'EDA')
+RAW=config.get('files', 'RAW')
 FILENAME=config.get('files', 'FILENAME')
 REGIONS_FILENAME=config.get('files','REGIONS_FILENAME')
+ECONOMIES_FILENAME=config.get('files','ECONOMIES_FILENAME')
+FLAGS_FOLDERNAME=config.get('files','FLAGS_FOLDERNAME')
 
 # GROUPS=groups.split(',')
 
@@ -38,6 +41,10 @@ df_long=df.melt(id_vars=["economy", "Country","series","Series"],\
         var_name="Year",
         value_name="Value")
 
+
+#read regions data
 filepath = os.path.join(ROOT_DIR, DATAPATH, EDA, REGIONS_FILENAME)
 df_regions=load_data(filepath,'csv')
-
+#read economies data
+filepath=os.path.join(ROOT_DIR,DATAPATH,EDA,ECONOMIES_FILENAME)
+df_economies=load_data(filepath,'csv')
